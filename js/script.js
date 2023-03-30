@@ -1,7 +1,24 @@
 'use strict';
 
 
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
+/* 1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
+
+2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
+отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
+возвращаем пользователя к вопросам опять
+
+3) При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
+"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
+"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
+
+4) Потренироваться и переписать цикл еще двумя способами */
+
+  
+
+
+/* const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
 
 const personalMovieDB = {
 	count: numberOfFilms,
@@ -11,91 +28,84 @@ const personalMovieDB = {
 	privat: false
 };
 
-const a = prompt('Один из последних просмотренных фильмов?', ''),
-	b = +prompt('На сколько оцените его?', ''),
-	c = prompt('Один из последних просмотренных фильмов?', ''),
-	d = +prompt('На сколько оцените его?', '');
+if (personalMovieDB.count < 10) {
+	alert('Просмотрено довольно мало фильмов');
+} else if (personalMovieDB.count > 30) {
+	alert('Вы киноман');
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+	alert('Вы классический зритель');
+} else {
+	alert('Произошла ошибка');
+}
 
-
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
-
+for (let i = 0; i < 2; i++) {
+	const a = prompt('Один из последних просмотренных фильмов?', ''),
+		b = +prompt('На сколько оцените его?', '');
+		
+	if (a != null && b != null && a != '' && b != '' && a.length < 51) {
+		personalMovieDB.movies[a] = b;
+		console.log('done');
+	} else {
+		console.log('Error');
+		i--;
+	}
+}
 console.log(personalMovieDB);
+*/
+
+//------------------------------------------------------------------------------------------------------------------------------------------
 
 
-//--------------------------------------
+/* let i = 0; 
 
-if (4 == 9) {
-	console.log('Ok');
-} else {
-	console.log('Nit');
+while (i < 2) {
+	const a = prompt('Один из последних просмотренных фильмов?', ''),
+		b = +prompt('На сколько оцените его?', '');
+		
+	if (a != null && b != null && a != '' && b != '' && a.length < 51) {
+		personalMovieDB.movies[a] = b;
+		console.log('done');
+		i++;
+	} else {
+		console.log('Error');		
+	}
+} */
+
+
+
+
+
+/* let i = 0; 
+
+
+do {
+	const a = prompt('Один из последних просмотренных фильмов?', ''),
+		b = +prompt('На сколько оцените его?', '');
+	
+	if (a != null && b != null && a != '' && b != '' && a.length < 51) {
+		personalMovieDB.movies[a] = b;
+		console.log('done');
+		i++;
+	} else {
+		console.log('Error');		
+	}
+}
+while (i < 2);  */
+
+
+
+
+//--------------------------------------------------------------------------------------------------------
+
+let num = 20;
+
+function showFirstMessage(text) {
+	console.log(text);
+	num = 20;
 }
 
-
-
-
-
-if (num < 49) {
-	console.log('Uu');
-} else if (num > 100) {
-	console.log('So much');
-} else {
-	console.log('Maybe');
-}
-
-(num === 50) ? console.log('Ok') : console.log('Error');
-
-
-let x = 10;
-let result = x > 10 ? 'більше 10' : 'менше або дорівнює 10';
-console.log(result); // виведе "більше 10"
-
-
-const num = '50';
-
-switch (num) {
-case '49':
-	console.log('Невірно');
-	break;
-case '100':
-	console.log('Невірно');
-	break;
-case '50':
-	console.log('Так');
-	break;
-default:
-	console.log('Шкода');
-	break;
-}
-
-
-/* const hamburger = 5;
-const fries = null;
-
-if (hamburger && fries) {
-	console.log('Yeeeh');
-} else {
-	console.log('lol')
-}
-
-console.log((hamburger && fries)); */
-
-
-const hamburger = 1;
-const fries = 3;
-const cola = 2;
-
-if (hamburger ===3 && cola === 2 || fries === 3 && cola === 2) {
-	console.log('Замовляємо');
-} else {
-	console.log('Йдемо в інше місце');
-}
-
-console.log(hamburger >=3 && cola >=2);
-console.log(fries >= 3 && cola >= 2);
-console.log(hamburger ===3 && cola === 2 || fries === 3 && cola === 2);
-
-console.log(!0);
+showFirstMessage('Hello Oleksii');
+console.log(num);
 
 
 
@@ -103,73 +113,6 @@ console.log(!0);
 
 
 
-
-console.log(hamburger || cola  || fries);
-
-if (hamburger || cola  || fries) {
-	console.log('Замовляємо');
-} else {
-	console.log('Йдемо в інше місце');
-}
-
-
-console.log(1 && 0);
-console.log(1 && 5);
-console.log(null && 0);
-console.log(0 && 'lalka');
-
-
-let johnReport, samReport, mariaReport = 'done';
-console.log(johnReport || samReport || mariaReport);
-
-
-
-console.log(NaN || 2  || undefined);
-console.log(NaN && 2  && undefined);
-console.log(1 && 2  && 3);
-console.log(!1 && 2  || !3);
-console.log(25 || null  && !3);
-
-
-console.log( NaN || null || !3 || undefined || 5);
-
-console.log( NaN || null && !3 && undefined || 5);
-
-console.log( 5 === 5 && 3 > 1 || 5);
-
-
-const hamburger = 3;
-const fries = 3;
-const cola = 0;
-const nuggets = 2;
-
-if (hamburger === 3 && cola || fries === 3 && nuggets) {
-   console.log('Done!')
-}
-
-
-
-let hamburger;
-const fries = NaN;
-const cola = 0;
-const nuggets = 2;
-
-if (hamburger || cola || fries === 3 || nuggets) {
-   console.log('Done!')
-}
-
-
-
-let hamburger;
-const fries = NaN;
-const cola = 0;
-const nuggets = 2;
-
-if (hamburger && cola || fries === 3 && nuggets) {
-   console.log('Done!');
-} else {
-	console.log('Lol');
-}
 
 
 
