@@ -17,7 +17,7 @@ P.S. Функции вызывать не обязательно*/
   
 
 
-let numberOfFilms;
+/* let numberOfFilms;
 
 function start() {
 	numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
@@ -37,7 +37,7 @@ const personalMovieDB = {
 	privat: false
 };
 
-/* function detectPersonalLevel() {
+function detectPersonalLevel() {
 	if (personalMovieDB.count < 10) {
 		alert('Просмотрено довольно мало фильмов');
 	} else if (personalMovieDB.count > 30) {
@@ -55,7 +55,7 @@ detectPersonalLevel();
 
 function rememberMyFilms() {
 	for (let i = 0; i < 2; i++) {
-		const a = prompt('Один из последних просмотренных фильмов?', ''),
+		const a = prompt('Один из последних просмотренных фильмов?', '').trim(),
 			b = +prompt('На сколько оцените его?', '');
 			
 		if (a != null && b != null && a != '' && b != '' && a.length < 51) {
@@ -68,11 +68,11 @@ function rememberMyFilms() {
 	}
 }
 
-rememberMyFilms(); */
+rememberMyFilms();
 
 function writeYourGenres() {
 	for (let i = 0; i < 3; i++) {
-		const genre = prompt(`Ваш любимый жанр под номером ${i+1}`, '');
+		const genre = prompt(`Ваш любимый жанр под номером ${i+1}`, '').trim();
 		if (genre != null && genre != '' && genre.length < 51) {
 			personalMovieDB.genres[i] = genre;
 			console.log('done');
@@ -91,7 +91,7 @@ function ShowMyDB(hidden) {
 	}
 }
 
-ShowMyDB(personalMovieDB.privat);
+ShowMyDB(personalMovieDB.privat); */
 
 
 
@@ -243,3 +243,78 @@ console.log(Math.round(num));
 const test = '12.2px';
 console.log(parseInt(test));
 console.log(parseFloat(test)); */
+
+
+/* function first() {
+	//do something
+	setTimeout(function() {
+		console.log(1);
+	}, 500);
+}
+
+
+function second() {
+	console.log(2);
+}
+
+first();
+second();
+
+function learnJS(lang, callback) {
+	console.log(`I learn: ${lang}`);
+	callback();
+}
+
+function done() {
+	console.log('I finish this lesson');
+}
+
+learnJS('Java Script', done); */
+
+
+/* 
+
+const options = {
+	name: 'test',
+	width: 1024,
+	height: 1024,
+	colors: {
+		border: 'black',
+		bg: 'red'
+	},
+	makeTest: function() {
+		console.log('Test');
+	}
+};
+
+options.makeTest();
+
+console.log(Object.keys(options)); */
+
+/* console.log(options['colors']['border']); */ 
+
+/* const {border, bg} = options.colors;
+console.log(border); */
+
+
+/* console.log(options.name);
+
+delete options.name;
+
+console.log(options); */
+
+
+/* let counter = 0;
+
+for (let key in options) {
+	if (typeof(options[key]) === 'object') {
+		for (let i in options[key]) {
+			console.log(`Властивість ${i} має значення ${options[key][i]}`);
+			counter++;
+		}
+	} else {
+		console.log(`Властивість ${key} має значення ${options[key]}`);
+		counter++;
+	}	
+}
+console.log(counter); */
