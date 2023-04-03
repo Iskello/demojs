@@ -3,95 +3,101 @@
 
 /* Задание на урок:
 
-1) Первую часть задания повторить по уроку
+1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
+перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
+Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
 
-2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
-false - выводит в консоль главный объект программы
+2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
+переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
 
-3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
-"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
-genres
-
-P.S. Функции вызывать не обязательно*/
+3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
+Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
+при помощи метода forEach вывести в консоль сообщения в таком виде:
+"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
   
 
 
-/* let numberOfFilms;
-
-function start() {
-	numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-
-	while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-		numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-	}
-}
-
-start();
 
 const personalMovieDB = {
-	count: numberOfFilms,
+	count: 0,
 	movies: {},
 	actors: {},
 	genres: [],
-	privat: false
-};
-
-function detectPersonalLevel() {
-	if (personalMovieDB.count < 10) {
-		alert('Просмотрено довольно мало фильмов');
-	} else if (personalMovieDB.count > 30) {
-		alert('Вы киноман');
-	} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
-		alert('Вы классический зритель');
-	} else {
-		alert('Произошла ошибка');
-	}
-}
-
-detectPersonalLevel();
-
-
-
-function rememberMyFilms() {
-	for (let i = 0; i < 2; i++) {
-		const a = prompt('Один из последних просмотренных фильмов?', '').trim(),
-			b = +prompt('На сколько оцените его?', '');
-			
-		if (a != null && b != null && a != '' && b != '' && a.length < 51) {
-			personalMovieDB.movies[a] = b;
-			console.log('done');
+	privat: false,
+	start: function() {
+		personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+	
+		while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+			personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+		}
+	},
+	detectPersonalLevel: function() {
+		if (personalMovieDB.count < 10) {
+			alert('Просмотрено довольно мало фильмов');
+		} else if (personalMovieDB.count > 30) {
+			alert('Вы киноман');
+		} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+			alert('Вы классический зритель');
 		} else {
-			console.log('Error');
-			i--;
+			alert('Произошла ошибка');
+		}
+	},
+	rememberMyFilms: function() {
+		for (let i = 0; i < 2; i++) {
+			const a = prompt('Один из последних просмотренных фильмов?', '').trim(),
+				b = +prompt('На сколько оцените его?', '');
+				
+			if (a != null && b != null && a != '' && b != '' && a.length < 51) {
+				personalMovieDB.movies[a] = b;
+				console.log('done');
+			} else {
+				console.log('Error');
+				i--;
+			}
+		}
+	},
+	writeYourGenres: function() {
+		for (let i = 0; i < 1; i++) {
+			/* 			const genre = prompt(`Ваш любимый жанр под номером ${i+1}`, '').trim();
+			if (genre != null && genre != '' && genre.length < 51) {
+				personalMovieDB.genres[i] = genre;
+				console.log('Добре');
+			} else {
+				console.log('Ви ввели некоректні дані або не ввели нічого');
+				i--;
+			} */
+
+			let genre = prompt('Введіть ваші найулюбленіші жанри через кому', '').toLowerCase().trim();
+			if (genre != null && genre != '' && genre.length < 51) {
+				personalMovieDB.genres = genre.split(', ');
+				personalMovieDB.genres.sort();
+				console.log('Добре');
+			} else {
+				console.log('Ви ввели некоректні дані або не ввели нічого');
+				i--;
+			}
+		}
+		personalMovieDB.genres.forEach ((item, i) => {
+			console.log(`Любимый жанр ${i+1} - это ${item}`);
+		});
+	},
+	ShowMyDB: function(hidden) {
+		if (!hidden) {
+			console.log(personalMovieDB);
+		}
+	},
+	toggleVisibleMyDB: function() {
+		if (personalMovieDB.privat) {
+			personalMovieDB.privat = false; 
+		} else {
+			personalMovieDB.privat = true;
 		}
 	}
-}
+}; 
 
-rememberMyFilms();
 
-function writeYourGenres() {
-	for (let i = 0; i < 3; i++) {
-		const genre = prompt(`Ваш любимый жанр под номером ${i+1}`, '').trim();
-		if (genre != null && genre != '' && genre.length < 51) {
-			personalMovieDB.genres[i] = genre;
-			console.log('done');
-		} else {
-			console.log('Error');
-			i--;
-		}
-	}
-}
 
-writeYourGenres();
-
-function ShowMyDB(hidden) {
-	if (!hidden) {
-		console.log(personalMovieDB);
-	}
-}
-
-ShowMyDB(personalMovieDB.privat); */
 
 
 
@@ -318,3 +324,197 @@ for (let key in options) {
 	}	
 }
 console.log(counter); */
+
+
+
+
+
+
+
+/* const arr = [5, 11, 17, 33, 57];
+arr.sort(compareNum);
+console.log(arr);
+
+function compareNum (a, b) {
+	return a - b;
+} */
+/* arr[99] = 0;
+console.log(arr.length);
+console.log(arr); */
+
+/* arr.forEach(function(item, i, arr) {
+	console.log(`${i}: ${item} всередині массиву ${arr}`);
+});
+
+
+for (let value of arr) {
+	console.log(value);
+}
+
+arr.pop();
+
+console.log(arr);
+
+arr.push(10);
+
+console.log(arr);
+
+for (let i = 0; i < arr.length; i++) {
+	console.log(arr[i]);
+} */
+
+
+
+
+
+/* const str = prompt('', '');
+const products = str.split(', ');
+console.log(products);
+console.log(products.join('; ')); */
+
+
+/* 
+
+let a = 5,
+	b = a;
+
+b = b + 5;
+
+console.log(b);
+console.log(a);
+
+
+
+
+
+
+const obj = {
+	a: 5,
+	b: 1
+}; */
+
+/* const copy = obj;
+
+copy.a = 10;
+
+console.log(copy);
+console.log(obj); */
+
+/* function copy(mainObj) {
+	let objCopy = {};
+
+	let key;
+	for (key in mainObj) {
+		objCopy[key] = mainObj[key];
+	}
+
+	return objCopy;
+}
+
+const numbers = {
+	a: 2,
+	b: 5,
+	c: {
+		x: 7,
+		y: 4
+	}
+};
+
+
+const newNumbers = copy(numbers);
+
+newNumbers.a = 10;
+newNumbers.c.x = 10;
+
+console.log(newNumbers); 
+console.log(numbers);
+
+
+const add = {
+	d: 17,
+	e: 20
+};
+
+const clone = Object.assign({}, add);
+clone.d = 20;
+
+console.log(clone);
+console.log(add);
+
+
+
+
+
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+newArray[1] = 'asdfghjkl';
+console.log(newArray);
+console.log(oldArray);
+
+
+
+const video = ['youtube', 'vimeo', 'patreon'],
+		blogs = ['wordpress', 'livejournal', 'blogger'],
+		internet = [...video, ...blogs, 'facebook', 'instagram'];
+
+console.log(internet);
+
+
+function log(a, b, c) {
+	console.log(a);
+	console.log(b);
+	console.log(c);
+}
+
+const num = [2, 5, 7];
+
+log(...num);
+
+
+const arr = ['a', 'b'];
+const newArr = [...arr];
+newArr[1] = 'bazuka';
+console.log(newArr);
+console.log(arr);
+
+
+const q = {
+	one: 1,
+	two: 2
+};
+const newObj = {...q}; */
+
+
+
+/* let str = 'some';
+let strObj = new String(str);
+
+console.dir ([1, 2, 3]);
+
+
+const soldier = {
+	health: 400,
+	armor: 100,
+	sayHello: function() {
+		console.log('hello');
+	}
+};
+
+const john = Object.create(soldier);
+
+console.log(john.armor);
+john.sayHello();
+
+
+
+
+const auto = {
+	speed: 100,
+	mass: 1000,
+	doorsValue: 4,
+	baggageComp: true
+};
+
+
+const shcoda = Object.create(auto);
+console.log(shcoda.mass); */
